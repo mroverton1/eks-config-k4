@@ -18,4 +18,5 @@ spec:
       annotations:
         kubernetes.io/ingress.class: alb
         alb.ingress.kubernetes.io/scheme: internet-facing
+        external-dns.alpha.kubernetes.io/hostname: demo.k4.dev.newinsights.io
       path: /*
