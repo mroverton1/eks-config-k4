@@ -1,0 +1,22 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: consul
+  namespace: consul
+spec:
+  releaseName: consul
+  chart:
+    git: https://github.com/hashicorp/consul-helm.git
+    ref: v0.20.1
+    path: /
+  values:
+    service:
+      enabled: true
+      type: NodePort
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: alb
+        alb.ingress.kubernetes.io/scheme: internet-facing
+        external-dns.alpha.kubernetes.io/hostname: consul.k4.dev.newinsights.io
+      path: /*
