@@ -1,0 +1,23 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: weave-scope
+  namespace: monitoring
+spec:
+  releaseName: weave-scope
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com/stable
+    name: weave-scope
+    version: 1.1.10
+  values:
+    service:
+      enabled: true
+      type: NodePort
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: alb
+        alb.ingress.kubernetes.io/scheme: internet-facing
+        external-dns.alpha.kubernetes.io/hostname: scope.k4.dev.newinsights.io
+      path: /*
